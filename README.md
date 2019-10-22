@@ -117,6 +117,23 @@ If a notification supports being stored in a database table, you should define a
     
 ```
 
+###  # Marking Notifications As Read and Unread: 
+Typically, you will want to mark a notification as "read" when a user views it. The `sitech_notifications.core.notifiable` mixin provides  `mark_as_read` and `mark_as_unread` methods, which updates the `read_at` column on the notification's database record:
+
+```python
+
+profile = Profile.objects.get(pk=1)
+
+# Marking notifications as read
+for notification profile.unread_notifications():
+    notification.mark_as_read()
+    
+# Marking notifications as unread   
+for notification profile.read_notifications():
+    notification.mark_as_unread()    
+    
+```
+
 
 ## Custom Channels
 Sitech Django Notifications ships with a handful of notification channels, but you may want to write your own channel to deliver notifications via other channels. Sitech Django Notifications makes it simple. To get started, define a class that extended from `sitech_notifications.core.BaseChannel` and contains a `send` method. The method should receive two arguments: a `notifiable` and a `notification`. or by run the following manage.py command:
