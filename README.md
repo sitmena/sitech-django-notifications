@@ -1,6 +1,7 @@
 # Sitech Django Notifications
 Notifying users of various things that happen in your application is super easy to implement. Sitech Django notifications allow you to send a message to any user via Email, Datbase, and many other channels.
 
+
 ## Installation
 
 Run the [pip](https://pip.pypa.io/en/stable/) command to install the latest version:
@@ -16,6 +17,7 @@ Add `sitech_notifications` to your `INSTALLED_APPS` in settings.py:
     'sitech_notifications',
  )
 ```
+
 
 ## Creating Notifications
 
@@ -41,6 +43,7 @@ class TestNotification(Notification):
   def to_database(self, notifiable):  
         pass
 ```
+
 
 ## Sending  Notifications
 
@@ -95,6 +98,25 @@ Let's quickly go through the different notification channels supported by Sitech
 -   **Database:** This option allows you to store notifications in a database should you wish to build a custom UI to display it.
 -  **Mail:** The notifications will be sent in the form of email to users.
 -  **Unifonic:** As the name suggests, users will receive SMS notifications on their phone.
+
+
+## Database Channels
+The `DatabaseChannel` notification stores the notification information in a database table. This table will contain information such as the notification type as well as custom JSON data that describes the notification.
+
+###  # Formatting Database Notifications:
+If a notification supports being stored in a database table, you should define a `to_database`  method on the notification class. This method will receive a `notifiable` entity and should return a plain Python dict. The returned dict will be encoded as JSON and stored in the `data` column of your `notifications` table. Let's take a look at an example `to_database` method:
+
+```python
+
+ # Get the dict representation of the notification. 
+ def to_database(self, notifiable): 
+    return {
+        'invoice_id': 12,
+        'amount': 200,
+    } 
+    
+```
+
 
 ## Custom Channels
 Sitech Django Notifications ships with a handful of notification channels, but you may want to write your own channel to deliver notifications via other channels. Sitech Django Notifications makes it simple. To get started, define a class that extended from `sitech_notifications.core.BaseChannel` and contains a `send` method. The method should receive two arguments: a `notifiable` and a `notification`. or by run the following manage.py command:
