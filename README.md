@@ -117,6 +117,30 @@ If a notification supports being stored in a database table, you should define a
     
 ```
 
+###  # Accessing The Notifications
+Once notifications are stored in the database, you need a convenient way to access them from your notifiable entities. To fetch notifications, you may use the `notifications` method. By default, notifications will be sorted by the `created_at` timestamp:
+```python
+
+ profile = Profile.objects.get(pk=1)
+ 
+ for notification profile.notifications():
+     print(notification.type)
+
+```
+
+If you want to retrieve only the "unread" notifications, you may use the  `unread_notifications`  method and If you want to retrieve only the "read" notifications, you may use the  `read_notifications`  method. Again, these notifications will be sorted by the  `created_at`  timestamp:
+
+```python
+
+ profile = Profile.objects.get(pk=1)
+ 
+ for notification in profile.unread_notifications():
+     print(notification.type)
+     
+ for notification in profile.read_notifications():
+     print(notification.type)
+```
+
 ###  # Marking Notifications As Read and Unread: 
 Typically, you will want to mark a notification as "read" when a user views it. The `sitech_notifications.core.notifiable` mixin provides  `mark_as_read` and `mark_as_unread` methods, which updates the `read_at` column on the notification's database record:
 
@@ -125,11 +149,11 @@ Typically, you will want to mark a notification as "read" when a user views it. 
 profile = Profile.objects.get(pk=1)
 
 # Marking notifications as read
-for notification profile.unread_notifications():
+for notification in profile.unread_notifications():
     notification.mark_as_read()
     
 # Marking notifications as unread   
-for notification profile.read_notifications():
+for notification in profile.read_notifications():
     notification.mark_as_unread()    
     
 ```
