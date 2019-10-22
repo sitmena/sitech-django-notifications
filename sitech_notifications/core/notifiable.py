@@ -1,0 +1,32 @@
+from sitech_notifications.models import DatabaseNotification
+from sitech_notifications.core.notification_sender import NotificationSender
+
+
+class HasDatabaseNotifications:
+
+    # Get the entity's notifications.
+    def notifications(self):
+        return DatabaseNotification.objects.filter(notifiable_type=self._meta.label_lower, notifiable_id=self.id)
+
+    # Get the entity's read notifications.
+    def read_notifications(self):
+        return self.notifications().filter(read_at__isnull=False)
+
+    # Get the entity's unread notifications.
+    def unread_notifications(self):
+        return self.notifications().filter(read_at__isnull=True)
+
+
+class RoutesNotifications:
+
+    # Send the given notification.
+    def notify(self, instance):
+        NotificationSender.send(self, instance)
+
+    # Send the given notification immediately.
+    def notify_now(self, instance,  channels=None):
+        NotificationSender.send_now(self, instance, channels)
+
+
+class Notifiable(HasDatabaseNotifications, RoutesNotifications):
+    pass

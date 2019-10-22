@@ -1,12 +1,12 @@
-# Sitech Notifications
-Notifying users of various things that happen in your application is super easy to implement. Sitech notifications allow you to send a message to any user via Email, Datbase, and many other channels.
+# Sitech Django Notifications
+Notifying users of various things that happen in your application is super easy to implement. Sitech Django notifications allow you to send a message to any user via Email, Datbase, and many other channels.
 
 ## Installation
 
 Run the [pip](https://pip.pypa.io/en/stable/) command to install the latest version:
 
 ```bash
- pip install git+https://github.com/sitmena/sitech-notifications.git@v1.0
+ pip install git+https://github.com/sitmena/sitech-django-notifications.git@v1.0
 ```
 
 Add `sitech_notifications` to your `INSTALLED_APPS` in settings.py:
@@ -19,7 +19,7 @@ Add `sitech_notifications` to your `INSTALLED_APPS` in settings.py:
 
 ## Creating Notifications
 
-In Sitech Notifications, each notification is represented by a single class, and to create a new notification you can run the following manage.py command:
+In Sitech Django Notifications, each notification is represented by a single class, and to create a new notification you can run the following manage.py command:
 ```bash
  python manage.py createnotification TestNotification
  ```   
@@ -90,7 +90,7 @@ The `via` method receives a `notifiable` instance, which will be an instance of 
 	 return	[DatabaseChannel]
 	 	     
 ```
-Let's quickly go through the different notification channels supported by Sitech Notifications.
+Let's quickly go through the different notification channels supported by Sitech Django Notifications.
 
 -   **Database:** This option allows you to store notifications in a database should you wish to build a custom UI to display it.
 -  **Mail:** The notifications will be sent in the form of email to users.
