@@ -95,3 +95,38 @@ Let's quickly go through the different notification channels supported by Sitech
 -   **Database:** This option allows you to store notifications in a database should you wish to build a custom UI to display it.
 -  **Mail:** The notifications will be sent in the form of email to users.
 -  **Unifonic:** As the name suggests, users will receive SMS notifications on their phone.
+
+## Custom Channels
+Sitech Django Notifications ships with a handful of notification channels, but you may want to write your own channel to deliver notifications via other channels. Sitech Django Notifications makes it simple. To get started, define a class that extended from `sitech_notifications.core.BaseChannel` and contains a `send` method. The method should receive two arguments: a `notifiable` and a `notification`. or by run the following manage.py command:
+
+```bash
+ python manage.py createchannel TestChannel
+```
+
+```python
+ from sitech_notifications.core import BaseChannel  
+  
+  
+ class TestChannel(BaseChannel):  
+	# Send the given notification.  
+	def send(self, notifiable, notification):  
+        pass
+	 	     
+```
+Once your notification channel class has been defined, you may return the class name from the `via` method of any of your notifications:
+
+```python
+class TestNotification(Notification):  
+  
+  # Get the notification's delivery channels.  
+  def via(self, notifiable):  
+        return [DatabaseChannel, TestChannel]  
+  
+  # Get the dict representation of the notification.  
+  def to_database(self, notifiable):  
+        pass
+        
+  # Get the dict representation of the notification.  
+  def to_test(self, notifiable):  
+        pass
+```
