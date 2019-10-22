@@ -1,3 +1,5 @@
+from django.db.models import QuerySet
+
 class NotificationSender:
 
     # Send the given notification to the given notifiable entities.
@@ -17,8 +19,8 @@ class NotificationSender:
             if not via_channels:
                 continue
 
-        for channel in via_channels:
-            cls.send_to_notifiable(notifiable, notification, channel)
+            for channel in via_channels:
+                cls.send_to_notifiable(notifiable, notification, channel)
 
     # Format the notifiables into a Collection / array if necessary.
     @classmethod
@@ -28,6 +30,6 @@ class NotificationSender:
     # Format the notifiables into a Collection / array if necessary.
     @classmethod
     def format_notifiables(cls, notifiables):
-        if not isinstance(object, list):
+        if not isinstance(notifiables, QuerySet):
             return [notifiables]
         return notifiables
