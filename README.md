@@ -101,7 +101,7 @@ Let's quickly go through the different notification channels supported by Sitech
 -  **Unifonic:** As the name suggests, users will receive SMS notifications on their phone.
 <br/>
 
-## Database Channels
+## Database Channel
 The `DatabaseChannel` notification stores the notification information in a database table. This table will contain information such as the notification type as well as custom JSON data that describes the notification.
 
 ###  # Formatting Database Notifications:
@@ -142,7 +142,7 @@ If you want to retrieve only the "unread" notifications, you may use the  `unrea
      print(notification.type)
 ```
 
-###  # Marking Notifications As Read and Unread: 
+###  # Marking Notifications As Read , Unread: 
 Typically, you will want to mark a notification as "read" when a user views it. The `sitech_notifications.core.notifiable` mixin provides  `mark_as_read` and `mark_as_unread` methods, which updates the `read_at` column on the notification's database record:
 
 ```python
@@ -156,6 +156,37 @@ for notification in profile.unread_notifications():
 # Marking notifications as unread   
 for notification in profile.read_notifications():
     notification.mark_as_unread()    
+    
+```
+<br/>
+
+## Unifonic Channel
+The `UnifonicChannel` notification allow you to sent the notification as SMS via Unifonic.
+
+You need to add `UNIFONIC_APPSID`  in settings.py:
+```bash
+ UNIFONIC_APPSID = "Your Unifonic APPSID" 
+```
+
+
+###  # Formatting Unifonic Notifications:
+If a notification supports being sent as an SMS, you should define a `to_unifonic` method on the notification class. This method will receive a `notifiable` entity and should return a `sitech_notifications.core.channels.unifonic_channel.UnifonicMessage` instance:
+```python
+ from sitech_notifications.core.channels.unifonic_channel import UnifonicMessage
+ 
+ # Get the Unifonic representation of the notification.
+ def to_unifonic(self, notifiable):  
+    return UnifonicMessage().set_body('Your SMS message content').set_recipient(notifiable.phone)
+    
+```
+### # Customizing The "SenderID":
+If you would like to send some notifications from a SenderID that is different from the default SenderID in your  Unifonic account, you may use the  `set_sender_id` method on a  `UnifonicMessage`  instance:
+```python
+ from sitech_notifications.core.channels.unifonic_channel import UnifonicMessage
+ 
+ # Get the Unifonic representation of the notification.
+ def to_unifonic(self, notifiable):  
+    return UnifonicMessage().set_body('Your SMS message content').set_recipient(notifiable.phone).set_sender_id('Your SenderID')
     
 ```
 <br/>
