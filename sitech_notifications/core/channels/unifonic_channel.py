@@ -18,8 +18,8 @@ class UnifonicChannel(BaseChannel):
                 'AppSid': settings.UNIFONIC_APPSID,
                 'Body': message.body,
                 'Recipient': message.recipient,
-                # 'Priority': message.priority,
-                # 'SenderID': message.sender_id
+                'Priority': message.priority,
+                'SenderID': message.sender_id
               },
             headers={'Content-Type': 'application/x-www-form-urlencoded'})
 
