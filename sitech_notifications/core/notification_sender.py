@@ -25,7 +25,9 @@ class NotificationSender:
     # Format the notifiables into a Collection / array if necessary.
     @classmethod
     def send_to_notifiable(cls, notifiable, notification, channel):
-        channel().send(notifiable, notification)
+
+        if notifiable.should_send_notification(notification, channel):
+            channel().send(notifiable, notification)
 
     # Format the notifiables into a Collection / array if necessary.
     @classmethod

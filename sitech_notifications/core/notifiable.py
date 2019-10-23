@@ -27,6 +27,10 @@ class RoutesNotifications:
     def notify_now(self, instance,  channels=None):
         NotificationSender.send_now(self, instance, channels)
 
+    # Determines if the notification can be sent.
+    def should_send_notification(self, notification, channel):
+        return True
+
 
 class Notifiable(HasDatabaseNotifications, RoutesNotifications):
     pass
