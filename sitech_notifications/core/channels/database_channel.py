@@ -10,11 +10,11 @@ class DatabaseChannel(BaseChannel):
             type="{0}.{1}".format(notification.__class__.__module__, notification.__class__.__name__),
             notifiable_type=notifiable._meta.label_lower,
             notifiable_id=notifiable.id,
-            data=self.getData(notifiable, notification)
+            data=self.get_data(notifiable, notification)
         ).save()
 
     # Get the data for the notification.
-    def getData(self, notifiable, notification):
+    def get_data(self, notifiable, notification):
         if hasattr(notification, 'to_database'):
             return notification.to_database(notifiable)
 

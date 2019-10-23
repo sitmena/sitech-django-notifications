@@ -35,6 +35,7 @@ setup(
       dependency_links=[],
       install_requires=[
           'setuptools',
-          'jsonfield'
+          'jsonfield',
+          'requests'
       ]
 )
