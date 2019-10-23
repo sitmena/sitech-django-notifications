@@ -163,6 +163,12 @@ for notification in profile.read_notifications():
 ## Unifonic Channel
 The `UnifonicChannel` notification allow you to sent the notification as SMS via Unifonic.
 
+You need to add `UNIFONIC_APPSID`  in settings.py:
+```bash
+ UNIFONIC_APPSID = "Your Unifonic APPSID" 
+```
+
+
 ###  # Formatting Unifonic Notifications:
 If a notification supports being sent as an SMS, you should define a `to_unifonic` method on the notification class. This method will receive a `notifiable` entity and should return a `sitech_notifications.core.channels.unifonic_channel.UnifonicMessage` instance:
 ```python
