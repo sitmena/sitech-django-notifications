@@ -160,6 +160,22 @@ for notification in profile.read_notifications():
 ```
 <br/>
 
+## Unifonic Channels
+The `UnifonicChannel` notification allow you to sent the notification as SMS via Unifonic.
+
+###  # Formatting Unifonic Notifications:
+If a notification supports being sent as an SMS, you should define a `to_unifonic` method on the notification class. This method will receive a `notifiable` entity and should return a `sitech_notifications.core.channels.unifonic_channel.UnifonicMessage` instance:
+
+```python
+ from sitech_notifications.core.channels.unifonic_channel import UnifonicMessage
+ 
+ # Get the Unifonic representation of the notification.
+ def to_unifonic(self, notifiable):  
+    return UnifonicMessage().set_body('Your SMS message content').set_recipient(notifiable.phone)
+    
+```
+<br/>
+
 ## Custom Channels
 Sitech Django Notifications ships with a handful of notification channels, but you may want to write your own channel to deliver notifications via other channels. Sitech Django Notifications makes it simple. To get started, define a class that extended from `sitech_notifications.core.BaseChannel` and contains a `send` method. The method should receive two arguments: a `notifiable` and a `notification`. or by run the following manage.py command:
 
