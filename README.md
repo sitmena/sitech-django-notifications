@@ -88,7 +88,7 @@ The `via` method receives a `notifiable` instance, which will be an instance of 
 ```python
 
  #Get the notification's delivery channels.
- def via(notifiable):
+ def via(self, notifiable):
 	 if notifiable.prefers_sms:
 		return [UnifonicChannel]
 	 return	[DatabaseChannel]
@@ -124,7 +124,7 @@ Once notifications are stored in the database, you need a convenient way to acce
 
  profile = Profile.objects.get(pk=1)
  
- for notification profile.notifications():
+ for notification in profile.notifications():
      print(notification.type)
 
 ```
