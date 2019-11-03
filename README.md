@@ -160,6 +160,26 @@ for notification in profile.read_notifications():
 ```
 <br/>
 
+## Mail Channel  
+If a notification supports being sent as an email, you should define a `to_mail` method on the notification class. This method will receive a `notifiable` entity and should return a [`django.core.mail.EmailMessage`](https://docs.djangoproject.com/en/2.2/topics/email/#the-emailmessage-class)  or  [`django.core.mail.EmailMultiAlternatives`](https://docs.djangoproject.com/en/2.2/topics/email/#sending-alternative-content-types) instance. Let's take a look at an example `to_mail` method:   
+```python
+from django.core.mail import EmailMessage
+ 
+ # Get the mail representation of the notification.
+ def to_mail(self, notifiable):  
+    return EmailMessage(
+        'Hello',
+        'Body goes here',
+        'from@example.com',
+        ['to1@example.com', 'to2@example.com'],
+        ['bcc@example.com'],
+        reply_to=['another@example.com'],
+        headers={'Message-ID': 'foo'},
+    )    
+
+```
+<br/>
+
 ## Unifonic Channel
 The `UnifonicChannel` notification allow you to sent the notification as SMS via Unifonic.
 
