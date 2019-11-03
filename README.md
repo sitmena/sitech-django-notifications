@@ -27,7 +27,7 @@ In Sitech Django Notifications, each notification is represented by a single cla
  python manage.py createnotification TestNotification
  ```   
  
-And this will place a fresh notification class with the below contents. Each notification class contains a `via` method and a variable number of message building methods (such as `to_mail` or `to_database`) that convert the notification to a message optimized for that particular channel.
+And this will place a fresh notification class with the below contents. Each notification class contains a `via` method and a variable number of message building methods (such as `to_email` or `to_database`) that convert the notification to a message optimized for that particular channel.
 
 ```python
 from sitech_notifications.core import Notification  

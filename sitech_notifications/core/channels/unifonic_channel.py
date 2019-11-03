@@ -6,6 +6,7 @@ import requests
 class UnifonicChannel(BaseChannel):
     BASE_URL = "http://api.unifonic.com/"
 
+    # Send the given notification.
     def send(self, notifiable, notification):
         message = self.get_message(notifiable, notification)
 
