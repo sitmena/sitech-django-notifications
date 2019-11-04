@@ -178,6 +178,47 @@ from django.core.mail import EmailMessage
     )    
 
 ```
+
+###  # Sending through "Mailgun" :
+To use the Mailgun provider,  you need to add the following parameters to your `settings.py`:
+
+```bash
+ EMAIL_HOST = 'smtp.mailgun.org'  
+ EMAIL_PORT = 587  
+ EMAIL_HOST_USER = 'postmaster@msg.com' #please change this with your username  
+ EMAIL_HOST_PASSWORD = '112233445566778899' #please change this with your password  
+ EMAIL_USE_TLS  =  True
+```
+
+###  # Sending through "SES" :
+To use the SES provider, you'll need [Boto](http://boto.cloudhackers.com/) 2.1.0 or higher. [Boto](http://boto.cloudhackers.com/) is a Python library that wraps the AWS API. 
+
+You can do the following to install boto 2.1.0 (we're using --upgrade here to make sure you get 2.1.0):
+```bash
+pip install --upgrade boto
+```
+
+Install django-ses:
+```bash
+pip install django-ses
+```
+
+Add the following to your settings.py:
+
+```python
+EMAIL_BACKEND = 'django_ses.SESBackend'
+
+# These are optional -- if they're set as environment variables they won't
+# need to be set here as well
+AWS_ACCESS_KEY_ID = 'YOUR-ACCESS-KEY-ID'
+AWS_SECRET_ACCESS_KEY = 'YOUR-SECRET-ACCESS-KEY'
+
+# Additionally, if you are not using the default AWS region of us-east-1,
+# you need to specify a region, like so:
+AWS_SES_REGION_NAME = 'us-west-2'
+AWS_SES_REGION_ENDPOINT = 'email.us-west-2.amazonaws.com'
+```
+
 <br/>
 
 ## Unifonic Channel
