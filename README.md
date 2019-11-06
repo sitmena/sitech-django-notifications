@@ -18,6 +18,12 @@ Add `sitech_notifications` to your `INSTALLED_APPS` in settings.py:
     'sitech_notifications',
  )
 ```
+
+Run the migration command:
+```bash
+ python manage.py migrate
+```
+
 <br/>
 
 ## Creating Notifications
