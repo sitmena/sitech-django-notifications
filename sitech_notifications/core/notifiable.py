@@ -6,7 +6,7 @@ class HasDatabaseNotifications:
 
     # Get the entity's notifications.
     def notifications(self):
-        return DatabaseNotification.objects.filter(notifiable_type=self._meta.label_lower, notifiable_id=self.id)
+        return DatabaseNotification.objects.filter(notifiable=self)
 
     # Get the entity's read notifications.
     def read_notifications(self):

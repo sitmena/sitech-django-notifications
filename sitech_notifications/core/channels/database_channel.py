@@ -8,8 +8,7 @@ class DatabaseChannel(BaseChannel):
     def send(self, notifiable, notification):
         DatabaseNotification(
             type="{0}.{1}".format(notification.__class__.__module__, notification.__class__.__name__),
-            notifiable_type=notifiable._meta.label_lower,
-            notifiable_id=notifiable.id,
+            notifiable=notifiable,
             data=self.get_data(notifiable, notification)
         ).save()
 
