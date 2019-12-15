@@ -8,7 +8,7 @@ Notifying users of various things that happen in your application is super easy 
 1. Run the [pip](https://pip.pypa.io/en/stable/) command to install the latest version:
 
 ```bash
- pip install git+https://github.com/sitmena/sitech-django-notifications.git
+ pip install git+https://github.com/sitmena/sitech-django-notifications.git@v1.0
 ```
 
 2. Add `sitech_notifications` to your `INSTALLED_APPS` in settings.py:
