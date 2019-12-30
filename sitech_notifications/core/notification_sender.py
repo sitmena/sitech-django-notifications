@@ -32,6 +32,6 @@ class NotificationSender:
     # Format the notifiables into a Collection / array if necessary.
     @classmethod
     def format_notifiables(cls, notifiables):
-        if not isinstance(notifiables, QuerySet):
+        if not isinstance(notifiables, QuerySet) and not isinstance(notifiables, list):
             return [notifiables]
         return notifiables
